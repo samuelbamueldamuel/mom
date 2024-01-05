@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <style>
+        .bank {
+            border: 5px solid black;
+            width: 150px;
+            top: 5px;
+            position: absolute;
+        }
+
+
+        .toDO {
+        position: absolute;
+        left: 232px;
+        top: 1px;
+        border: 5px solid black;
+        }
+        .history{
+        position: absolute;
+        left: 700px;
+        border: 5px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bank">
+    <a href="/addTask/">Add Task</a>
+    <a href="/kill/">Kill</a>
+    <a href="/toDo/">To Do</a>
+    
+    <table>
+        <tr>
+            <th>
+                Task Name
+            </th>
+            <th>
+                Point Value
+            </th>
+            <th>
+                Choose
+            </th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>
+                {{task.name}}
+            </td>
+            <td>
+                {{task.point}}
+            </td>
+            <td>
+                <a href="{% url 'choice' key=task.key %}"> Choose </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    </div>
+
+    <div class="toDO">
+        <table>
+            <tr>
+                <th>
+                    To Do
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Task Name
+                </th>
+                <th>
+                    Point Value
+                </th>
+    
+            </tr>
+            {% for task in toTasks %}
+            <tr>
+                <td>
+                    {{task.name}}
+                </td>
+                <td>
+                    {{task.point}}
+                </td>
+            </tr>
+            {% endfor %}
+    
+        </table>
+        <a href="/random/">Random</a>
+    </div>
+
+    <div class="history">
+        <a href="/killHistory/">Kill</a>
+        <table>
+            <tr>
+                <th>
+                    History
+                </th>
+            </tr>
+
+            <tr>
+                <th>Task Name</th>
+                <th>Point Value</th>
+                <th>Accepted?</th>
+            </tr>
+
+        {% for h in history %}
+            <tr>
+                <td>{{ h.name }}</td>
+                <td>{{ h.point }}</td>
+                <td>{{ h.accepted }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td>Total:</td>
+            <td>{{total}}</td>
+        </tr>
+        </table>
+    </div>
+
+
+
+</body>
+
+</html>
+
